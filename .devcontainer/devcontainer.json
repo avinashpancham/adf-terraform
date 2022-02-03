@@ -1,0 +1,49 @@
+{
+	"name": "Bootstrap development environment",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"settings": {
+		"python.pythonPath": "/usr/local/bin/python",
+		"python.languageServer": "Pylance",
+		"python.autoComplete.extraPaths": ["/usr/local/lib/python3.9/site-packages", "/home/vscode/.local/lib/python3.9/site-packages"],
+		"python.analysis.extraPaths": ["/usr/local/lib/python3.9/site-packages", "/home/vscode/.local/lib/python3.9/site-packages"],
+		"python.analysis.indexing": true,
+        "terminal.integrated.defaultProfile.linux": "zsh", 
+        "terminal.integrated.profiles.linux": {
+            "zsh": {
+                "path": "/bin/zsh"
+            },
+        }
+	},
+	"extensions": [
+		"4ops.terraform",
+		"eamodio.gitlens",
+		"GitHub.vscode-pull-request-github",
+		"ms-azuretools.vscode-docker",
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"pjmiravalle.terraform-advanced-syntax-highlighting",
+		"yzhang.markdown-all-in-one"
+	],
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.kube,target=/home/vscode/.kube,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.vscode/extensions,target=/home/vscode/.vscode-server/extensions,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.azure,target=/home/vscode/.azure,type=bind,consistency=cached",
+		"source=pre-commit-cache,target=/home/vscode/.cache/pre-commit,type=volume,consistency=cached",
+		"source=CHANGEME-bashhistory,target=/commandhistory,type=volume",
+		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+	],
+	"remoteEnv": {
+		"VISUAL": "vim.tiny",
+		"EDITOR": "${remoteEnv:VISUAL}",
+		"PATH": "${containerEnv:PATH}:${containerEnv:HOME}/adr-tools-3.0.0/src:/usr/local/go/bin"
+	},
+	"postCreateCommand": "pre-commit install && sudo pre-commit install-hooks",
+	"remoteUser": "vscode",
+	"runArgs": ["--init"],
+	"overrideCommand": false
+}

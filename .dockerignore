@@ -1,0 +1,3 @@
+*
+!requirements.txt
+!.devcontainer/library-scripts/docker-debian.sh
