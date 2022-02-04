@@ -6,3 +6,8 @@ Azure Data Factory (ADF) is a popular ETL on Azure. Its offers multiple approach
 - ARM template: Fully automated approach to deploy workflows. The disadvantage (according to me) that ARM templates are large JSON files that are not convenient to work with
   
 My personal preference is to automate the deployment of ADF workflows with Terraform. The [`azurerm`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_factory) provider offers multiple resources to enable this. At the time of writing examples of this are, however, still lacking. Therefore I decided to explore this on my own. 
+
+## Setup
+Source: Azure storage container with [Cars93 csv](https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/MASS/Cars93.csv)
+Pipeline: ADF
+Target: ADLS
