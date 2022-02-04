@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "source" {
-  name                     = "adfsourceavinash"
+  name                     = local.storage_account_name
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
@@ -14,9 +14,9 @@ resource "azurerm_storage_container" "source" {
 
 
 resource "azurerm_storage_blob" "file" {
-  name                   = "Cars93.csv"
+  name                   = "cars"
   storage_account_name   = azurerm_storage_account.source.name
   storage_container_name = azurerm_storage_container.source.name
   type                   = "Block"
-  source                 = "Cars93.csv"
+  source                 = local.filename
 }
