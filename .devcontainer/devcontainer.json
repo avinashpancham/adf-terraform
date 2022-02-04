@@ -34,7 +34,7 @@
 		"source=${localEnv:HOME}/.vscode/extensions,target=/home/vscode/.vscode-server/extensions,type=bind,consistency=cached",
 		"source=${localEnv:HOME}/.azure,target=/home/vscode/.azure,type=bind,consistency=cached",
 		"source=pre-commit-cache,target=/home/vscode/.cache/pre-commit,type=volume,consistency=cached",
-		"source=CHANGEME-bashhistory,target=/commandhistory,type=volume",
+		"source=adf-bashhistory,target=/commandhistory,type=volume",
 		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
 	],
 	"remoteEnv": {
