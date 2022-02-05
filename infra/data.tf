@@ -1,5 +1,5 @@
 data "azurerm_resource_group" "rg" {
-  name = local.name
+  name = local.resource_group_name
 }
 
 data "azurerm_storage_account" "datalake" {
