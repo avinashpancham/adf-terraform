@@ -1,4 +1,4 @@
-resource "azurerm_data_factory_pipeline" "test" {
+resource "azurerm_data_factory_pipeline" "copy-pipeline" {
   name                = "copy-pipeline"
   resource_group_name = data.azurerm_resource_group.rg.name
   data_factory_id     = data.azurerm_data_factory.adf.id
@@ -28,11 +28,26 @@ resource "azurerm_data_factory_pipeline" "test" {
                             "type": "DelimitedTextReadSettings"
                         }
                     },
+                    "sink": {
+                        "type": "ParquetSink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        },
+                        "formatSettings": {
+                            "type": "ParquetWriteSettings"
+                        }
+                    },
                     "enableStaging": false
                 },
                 "inputs": [
                     {
                         "referenceName": "${azurerm_data_factory_dataset_delimited_text.file.name}",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "${azurerm_data_factory_dataset_parquet.parquet.name}",
                         "type": "DatasetReference"
                     }
                 ]
