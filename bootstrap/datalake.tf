@@ -10,6 +10,6 @@ resource "azurerm_storage_account" "datalake" {
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "datalake" {
-  name               = "target"
+  name               = local.data_container_name
   storage_account_id = azurerm_storage_account.datalake.id
 }

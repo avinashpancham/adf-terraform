@@ -1,5 +1,5 @@
 locals {
-  name          = "adf-terraform"
-  resource_name = "${local.name}-${terraform.workspace}"
-  datalake_name = "adfdatalakeavinash"
+  resource_group_name = "adf-terraform"
+  datalake_name       = "adfdatalakeavinash"
+  data_container_name = "data"
 }

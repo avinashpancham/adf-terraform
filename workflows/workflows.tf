@@ -41,13 +41,13 @@ resource "azurerm_data_factory_pipeline" "copy-pipeline" {
                 },
                 "inputs": [
                     {
-                        "referenceName": "${azurerm_data_factory_dataset_delimited_text.file.name}",
+                        "referenceName": "${azurerm_data_factory_dataset_delimited_text.source_csv.name}",
                         "type": "DatasetReference"
                     }
                 ],
                 "outputs": [
                     {
-                        "referenceName": "${azurerm_data_factory_dataset_parquet.parquet.name}",
+                        "referenceName": "${azurerm_data_factory_dataset_parquet.sink_parquet.name}",
                         "type": "DatasetReference"
                     }
                 ]
