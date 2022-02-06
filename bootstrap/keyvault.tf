@@ -1,13 +1,3 @@
-resource "random_password" "username" {
-  length  = 16
-  special = false
-}
-
-resource "random_password" "password" {
-  length  = 16
-  special = true
-}
-
 resource "azurerm_key_vault" "kv" {
   name                       = local.kv_name
   location                   = azurerm_resource_group.rg.location
@@ -27,12 +17,6 @@ resource "azurerm_key_vault" "kv" {
     ]
 
   }
-}
-
-resource "azurerm_key_vault_secret" "username" {
-  name         = "db-user"
-  value        = random_password.username.result
-  key_vault_id = azurerm_key_vault.kv.id
 }
 
 resource "azurerm_key_vault_secret" "password" {

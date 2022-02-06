@@ -1,10 +1,20 @@
+resource "random_string" "username" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "password" {
+  length  = 16
+  special = true
+}
+
 resource "azurerm_postgresql_server" "source" {
   name                          = local.postgres_name
   location                      = azurerm_resource_group.rg.location
   resource_group_name           = azurerm_resource_group.rg.name
   public_network_access_enabled = true
 
-  administrator_login          = azurerm_key_vault_secret.username.value
+  administrator_login          = random_string.username.result
   administrator_login_password = azurerm_key_vault_secret.password.value
   backup_retention_days        = 7
   sku_name                     = "B_Gen5_1"
@@ -42,6 +52,6 @@ resource "azurerm_postgresql_firewall_rule" "azure" {
 resource "null_resource" "fill-db" {
   depends_on = [azurerm_postgresql_database.db, azurerm_postgresql_firewall_rule.home]
   provisioner "local-exec" {
-    command = "python scripts/fill_db.py postgresql://${azurerm_key_vault_secret.username.value}%40${azurerm_postgresql_server.source.name}:${urlencode(azurerm_key_vault_secret.password.value)}@${azurerm_postgresql_server.source.name}.postgres.database.azure.com:5432/${azurerm_postgresql_database.db.name}"
+    command = "python scripts/fill_db.py postgresql://${random_string.username.result}%40${azurerm_postgresql_server.source.name}:${urlencode(azurerm_key_vault_secret.password.value)}@${azurerm_postgresql_server.source.name}.postgres.database.azure.com:5432/${azurerm_postgresql_database.db.name}"
   }
 }
