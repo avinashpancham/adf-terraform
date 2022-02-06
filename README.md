@@ -1,4 +1,4 @@
-# Complete Azure Data Factory deployment using Terraform
+# Deploy an Azure Data Factory setup without git integration using Terraform
 Azure Data Factory (ADF) is a popular orchestrator tool on Azure. Deploying workflows to ADF via [Git integration](https://docs.microsoft.com/en-us/azure/data-factory/continuous-integration-delivery) is recommended by Microsoft, but poses problems in a team setting as the complete Git repository is now tied to a single ADF resource. As a result I explored how multiple ADF resources could easily be deployed with Infrastructure as Code (such as Terraform) on a per request base. Terraform's [`azurerm`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_factory) provider offers multiple ADF related resources to enable this, but at the time of writing I could not find a Terraform deployment example of ADF without git integration. Hence I decided to do it myself!
 
 ## Pipeline setup
