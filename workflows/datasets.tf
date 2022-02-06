@@ -1,19 +1,9 @@
-resource "azurerm_data_factory_dataset_delimited_text" "source_csv" {
-  name                = local.source_csv_name
+resource "azurerm_data_factory_dataset_postgresql" "source_table" {
+  name                = local.source_sql_name
   resource_group_name = data.azurerm_resource_group.rg.name
   data_factory_id     = data.azurerm_data_factory.adf.id
-  linked_service_name = azurerm_data_factory_linked_service_azure_blob_storage.source_storage.name
-
-  azure_blob_storage_location {
-    container = local.data_container_name
-    filename  = local.blob_name
-  }
-
-  column_delimiter    = ","
-  escape_character    = "\\"
-  quote_character     = "\""
-  row_delimiter       = "\n"
-  first_row_as_header = true
+  linked_service_name = azurerm_data_factory_linked_service_postgresql.postgres.name
+  table_name          = local.table_name
 }
 
 resource "azurerm_data_factory_dataset_parquet" "sink_parquet" {
@@ -24,8 +14,8 @@ resource "azurerm_data_factory_dataset_parquet" "sink_parquet" {
   compression_codec   = "snappy"
 
   azure_blob_storage_location {
-    container = local.data_container_name
+    container = local.container_name
     path      = terraform.workspace
-    filename  = local.raw_sink_filename
+    filename  = local.sink_filename
   }
 }
