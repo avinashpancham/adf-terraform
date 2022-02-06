@@ -7,9 +7,19 @@ data "azurerm_data_factory" "adf" {
   resource_group_name = data.azurerm_resource_group.rg.name
 }
 
-data "azurerm_storage_account" "source" {
-  name                = local.source_storage_account_name
+data "azurerm_postgresql_server" "postgres" {
+  name                = local.postgres_name
   resource_group_name = data.azurerm_resource_group.rg.name
+}
+
+data "azurerm_key_vault" "kv" {
+  name                = local.kv_name
+  resource_group_name = data.azurerm_resource_group.rg.name
+}
+
+data "azurerm_key_vault_secret" "db-password" {
+  name         = "db-password"
+  key_vault_id = data.azurerm_key_vault.kv.id
 }
 
 data "azurerm_storage_account" "datalake" {

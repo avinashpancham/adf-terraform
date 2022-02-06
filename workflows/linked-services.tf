@@ -1,8 +1,8 @@
-resource "azurerm_data_factory_linked_service_azure_blob_storage" "source_storage" {
-  name                = local.source_storage_account_name
+resource "azurerm_data_factory_linked_service_postgresql" "postgres" {
+  name                = local.postgres_name
   resource_group_name = data.azurerm_resource_group.rg.name
   data_factory_id     = data.azurerm_data_factory.adf.id
-  connection_string   = data.azurerm_storage_account.source.primary_connection_string
+  connection_string   = "Host=${data.azurerm_postgresql_server.postgres.fqdn};Port=5432;Database=${local.database_name};UID=${data.azurerm_postgresql_server.postgres.administrator_login}@${data.azurerm_postgresql_server.postgres.name};EncryptionMethod=0;Password=${data.azurerm_key_vault_secret.db-password.value}"
 }
 
 resource "azurerm_data_factory_linked_service_data_lake_storage_gen2" "datalake" {
