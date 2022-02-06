@@ -8,6 +8,6 @@ Azure Data Factory (ADF) is a popular ETL tool on Azure. It offers multiple appr
 My personal preference is to automate the deployment of ADF workflows with Terraform. The [`azurerm`](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_factory) provider offers multiple resources to enable this. At the time of writing examples of this are, however, still lacking. Therefore I decided to explore this on my own. 
 
 ## Setup
-Source: Azure Storage Container with blob containing ["Cars93.csv"](https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/MASS/Cars93.csv)
-Pipeline: Copy Data from Azure Storage Container to Azure Data Lake gen2
-Sink: Azure Data Lake gen2 with `parquet` file containing "Cars93.csv"
+- Source: Azure PostgreSQL database with table containing ["Cars93.csv"](https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/MASS/Cars93.csv)
+- Pipeline: Copy Data from Azure PostgreSQL table to Azure Data Lake gen2
+- Sink: Azure Data Lake gen2 with `parquet` file containing "Cars93.csv"
