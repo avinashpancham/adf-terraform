@@ -1,5 +1,5 @@
-resource "azurerm_data_factory_pipeline" "copy-pipeline" {
-  name                = local.pipeline_name
+resource "azurerm_data_factory_pipeline" "copy-to-parquet" {
+  name                = local.parquet_pipeline_name
   resource_group_name = data.azurerm_resource_group.rg.name
   data_factory_id     = data.azurerm_data_factory.adf.id
   activities_json     = <<JSON
