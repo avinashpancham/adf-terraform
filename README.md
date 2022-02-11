@@ -5,7 +5,9 @@ Azure Data Factory (ADF) is a popular orchestrator tool on Azure. Deploying work
 The envisioned ADF pipeline consists of:
 - Source: Azure PostgreSQL database with a `cars` table containing the [Cars93](https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/MASS/Cars93.csv) csv file.
 - Activity: `Copy Data` task from Azure PostgreSQL table to Azure Data Lake gen2
-- Sink: Azure Data Lake gen2 with `cars.parquet` file containing the Cars93 dataset
+- Sink: 
+    1. Azure Data Lake gen2 with `cars.parquet` file containing the Cars93 dataset
+    2. Azure Data Lake gen2 with `cars.csv` file containing the Cars93 dataset
 
 ## Azure setup
 The Terraform code to deploy resources on Azure is spread over three directories `bootstrap`, `infra` and `workflows`.
